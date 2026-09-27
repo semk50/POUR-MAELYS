@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Une surprise pour Maelys !</title>
+    <style>
+        :root {
+            --rose: #e75480;
+            --rose-fonce: #b83262;
+            --encre: #42243a;
+            --creme: #fffaf5;
+            --or: #f5b942;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            color: var(--encre);
+            background: linear-gradient(135deg, #ffd6df 0%, #fff0c7 52%, #d9f2ee 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-height: 100svh;
+            margin: 0;
+            padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+            overflow-x: hidden;
+        }
+
+        .card {
+            position: relative;
+            background: rgba(255, 250, 245, 0.94);
+            padding: clamp(28px, 7vw, 56px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 24px 60px rgba(91, 43, 69, 0.18);
+            text-align: center;
+            max-width: 560px;
+            width: 100%;
+            animation: appear 700ms ease-out both;
+        }
+
+        .eyebrow {
+            margin: 0 0 14px;
+            color: var(--rose-fonce);
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 0.78rem;
+            font-weight: bold;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--rose-fonce);
+            font-size: clamp(2.3rem, 9vw, 4.7rem);
+            line-height: 0.98;
+        }
+
+        h1 span {
+            display: block;
+            color: var(--encre);
+            font-size: 0.57em;
+            margin-top: 12px;
+        }
+
+        p {
+            color: #694c5e;
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.65;
+        }
+
+        .intro {
+            max-width: 390px;
+            margin: 24px auto 0;
+        }
+
+        .btn {
+            background-color: var(--rose);
+            color: white;
+            border: none;
+            padding: 15px 24px;
+            margin-top: 20px;
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            touch-action: manipulation;
+            transition: transform 160ms ease, background-color 160ms ease;
+        }
+
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 26px 0 8px;
+        }
+
+        .choice {
+            min-height: 110px;
+            border: 1px solid #f2c4d1;
+            border-radius: 6px;
+            background: #fff;
+            color: var(--encre);
+            cursor: pointer;
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 2.7rem;
+            transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+        }
+
+        .choice:hover {
+            border-color: var(--rose);
+            box-shadow: 0 8px 18px rgba(91, 43, 69, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .code-display {
+            margin: 26px 0 8px;
+            color: var(--rose-fonce);
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: clamp(2.4rem, 10vw, 4rem);
+            font-weight: bold;
+            letter-spacing: 0.18em;
+        }
+
+        .code-input {
+            width: 190px;
+            padding: 12px;
+            border: 2px solid #f2c4d1;
+            border-radius: 4px;
+            color: var(--encre);
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 1.35rem;
+            letter-spacing: 0.25em;
+            text-align: center;
+        }
+
+        .code-input:focus {
+            border-color: var(--rose);
+            outline: 3px solid rgba(231, 84, 128, 0.18);
+        }
+
+        .game-feedback {
+            min-height: 26px;
+            margin: 12px 0 0;
+            color: var(--rose-fonce);
+            font-size: 0.95rem;
+        }
+
+        .btn:hover {
+            background-color: var(--rose-fonce);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            background-color: var(--rose-fonce);
+            transform: scale(0.98);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .gift-box {
+            font-size: 4.5rem;
+            margin: 0 0 22px;
+            animation: bounce 1.4s ease-in-out infinite alternate;
+        }
+
+        .message {
+            margin: 28px 0 0;
+            padding: 24px 18px;
+            border-top: 1px solid #f2c4d1;
+            border-bottom: 1px solid #f2c4d1;
+        }
+
+        .message strong {
+            color: var(--rose-fonce);
+        }
+
+        .signature {
+            margin-bottom: 0;
+            color: var(--rose-fonce);
+            font-family: Georgia, 'Times New Roman', serif;
+            font-style: italic;
+            font-size: 1.25rem;
+        }
+
+        .confetti {
+            position: absolute;
+            color: var(--or);
+            font-size: 1.4rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .confetti-one { top: 24px; left: 28px; }
+        .confetti-two { top: 55px; right: 32px; color: var(--rose); animation-delay: 600ms; }
+        .confetti-three { bottom: 28px; left: 42px; color: #58a99d; animation-delay: 1s; }
+
+        @keyframes appear {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0) rotate(-3deg); }
+            to { transform: translateY(-10px) rotate(3deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-8px) rotate(12deg); }
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <span class="confetti confetti-one" aria-hidden="true">✦</span>
+        <span class="confetti confetti-two" aria-hidden="true">✿</span>
+        <span class="confetti confetti-three" aria-hidden="true">✦</span>
+
+        <div id="game">
+            <div class="gift-box" aria-hidden="true">🔢</div>
+            <p class="eyebrow">Petite mission avant la surprise</p>
+            <h1>Le code secret<span>de Maelys</span></h1>
+            <p class="intro">Regarde bien le code : il va disparaître dans quelques secondes. Essaie de le retenir, puis devine-le !</p>
+            <div id="code-display" class="code-display" aria-live="polite">?????</div>
+            <button id="show-code" class="btn" type="button" onclick="showCode()">Afficher le code 🔐</button>
+            <div id="code-entry" class="hidden">
+                <p>Le code a disparu ! À toi de le retaper.</p>
+                <input id="code-input" class="code-input" type="text" inputmode="numeric" maxlength="6" autocomplete="off" aria-label="Code secret" onkeydown="if (event.key === 'Enter') checkCode()">
+                <br>
+                <button class="btn" type="button" onclick="checkCode()">Déverrouiller 🎁</button>
+            </div>
+            <p id="game-feedback" class="game-feedback" aria-live="polite"></p>
+        </div>
+
+        <div id="birthday-card" class="hidden">
+            <div class="gift-box" aria-hidden="true">🎁</div>
+            <p class="eyebrow">Une journée rien que pour toi</p>
+            <h1>Joyeux anniversaire<span>Maelys !</span></h1>
+            <button id="birthday-button" class="btn" type="button" onclick="showMessage()">Ouvrir ton message ✨</button>
+        </div>
+
+        <div id="birthday-message" class="message hidden">
+            <p><strong>Surprise !</strong><br>Aujourd’hui, on célèbre la personne merveilleuse que tu es. Que cette nouvelle année t’apporte plein de bonheur, de rires et de beaux souvenirs.<br><br>Tu mérites une journée aussi lumineuse que ton sourire et tout le bonheur du monde.</p>
+            <p class="signature">Avec beaucoup d’affection ❤️<br>de la part de tonton sem</p>
+        </div>
+
+    </main>
+
+    <script>
+        const secretCode = '583712';
+
+        function showCode() {
+            const codeDisplay = document.getElementById('code-display');
+            const showButton = document.getElementById('show-code');
+            const entry = document.getElementById('code-entry');
+            const feedback = document.getElementById('game-feedback');
+
+            codeDisplay.textContent = secretCode;
+            showButton.classList.add('hidden');
+            entry.classList.add('hidden');
+            feedback.textContent = 'Tu as 5 secondes pour le mémoriser...';
+
+            setTimeout(() => {
+                codeDisplay.textContent = '•••••';
+                entry.classList.remove('hidden');
+                feedback.textContent = 'À toi de jouer !';
+                document.getElementById('code-input').focus();
+            }, 5000);
+        }
+
+        function checkCode() {
+            const input = document.getElementById('code-input');
+            const feedback = document.getElementById('game-feedback');
+
+            if (input.value !== secretCode) {
+                feedback.textContent = 'Ce n’est pas le bon code. Réessaie !';
+                input.value = '';
+                input.focus();
+                return;
+            }
+
+            document.getElementById('game').classList.add('hidden');
+            document.getElementById('birthday-card').classList.remove('hidden');
+        }
+
+        function showMessage() {
+            document.getElementById('birthday-message').classList.remove('hidden');
+            document.getElementById('birthday-button').classList.add('hidden');
+        }
+    </script>
+
+</body>
+</html>
